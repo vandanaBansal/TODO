@@ -10,7 +10,7 @@ import kotlinx.coroutines.launch
 class MainViewModel(private val repository: TodoRepository) :ViewModel() {
     val todos = repository.allTodos
 
-    // 3. Todo Operations
+    // Add data in list
     fun addTodo(todo: String) =
         viewModelScope.launch(Dispatchers.IO) {
             repository.insert(TodoItem(title = todo)) }
