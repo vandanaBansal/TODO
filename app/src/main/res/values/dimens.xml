@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="Medium">8dp</dimen>
+    <dimen name="Large">16dp</dimen>
+    <dimen name="TodoItemHeight">48dp</dimen>
+    <dimen name="TodoInputBarFabSize">60dp</dimen>
+
+
+</resources>

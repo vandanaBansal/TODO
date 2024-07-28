@@ -68,10 +68,16 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
-//    Hilt dependency
-    implementation ("com.google.dagger:hilt-android:2.49")
+    // 1. Hilt dependency
+    implementation ("com.google.dagger:hilt-android:2.51")
     kapt ("com.google.dagger:hilt-android-compiler:2.45")
     kapt ("androidx.hilt:hilt-compiler:1.2.0")
     implementation ("androidx.hilt:hilt-navigation-compose:1.2.0")
+    // 2. Room Runtime
+    implementation("androidx.room:room-runtime:2.6.1")
+    // 3. Room KTX
+    implementation("androidx.room:room-ktx:2.6.1")
+    // 4. Room Compiler
+    kapt("androidx.room:room-compiler:2.6.1")
 
 }
