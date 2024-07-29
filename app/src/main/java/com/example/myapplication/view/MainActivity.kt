@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
@@ -21,13 +22,16 @@ import com.example.myapplication.ui.theme.MyApplicationTheme
 import com.example.myapplication.composable.FAB
 import com.example.myapplication.composable.MainScreen
 import com.example.myapplication.model.Screen
+
 import com.example.myapplication.viewmodel.MainViewModel
+import com.example.myapplication.viewmodel.MainViewModelFactory
+
 
 class MainActivity : ComponentActivity() {
-    private val mainViewModel: MainViewModel by viewModels<MainViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContent {
             MyApplicationTheme {
                 // A surface container using the 'background' color from the theme
@@ -36,7 +40,10 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     val navController = rememberNavController()
-                    SetupNavGraph(navController = navController,mainViewModel)
+                    val mainViewModel = viewModels<MainViewModel> {
+                        MainViewModelFactory((application as ToDoApplication).movieRepository)
+                    }
+                    SetupNavGraph(navController = navController, mainViewModel)
                 }
             }
         }
@@ -45,12 +52,12 @@ class MainActivity : ComponentActivity() {
 
 
 @Composable
-fun HomeScreen(navController: NavHostController, mainViewModel:MainViewModel){
+fun HomeScreen(navController: NavHostController, mainViewModel: Lazy<MainViewModel>) {
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
         MainScreen(
-            todoItemsFlow = mainViewModel.todos,
+            todoItemsFlow = mainViewModel.value.todos,
         )
         FAB(
             modifier = Modifier.align(Alignment.BottomEnd),
@@ -62,20 +69,17 @@ fun HomeScreen(navController: NavHostController, mainViewModel:MainViewModel){
 }
 
 @Composable
-fun SetupNavGraph(navController: NavHostController, mainViewModel: MainViewModel) {
+fun SetupNavGraph(navController: NavHostController, mainViewModel: Lazy<MainViewModel>) {
     NavHost(
         navController = navController,
         startDestination = Screen.MainScreen.route
     ) {
         composable(route = Screen.DetailScreen.route) {
-            DetailScreen(
-                modifier = Modifier,
-                onAddButtonClick = mainViewModel::addTodo,
-            )
+            DetailScreen(modifier = Modifier) { mainViewModel.value.addTodo(it) }
         }
 
         composable(route = Screen.MainScreen.route) {
-            HomeScreen(navController,mainViewModel)
+            HomeScreen(navController, mainViewModel)
         }
 
     }

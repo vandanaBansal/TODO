@@ -1,22 +1,27 @@
 package com.example.myapplication.viewmodel
 
+import androidx.compose.runtime.collectAsState
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.myapplication.model.TodoItem
-import com.example.myapplication.model.TodoRepository
+import com.example.myapplication.model.entities.TodoItem
+import com.example.myapplication.model.repository.TodoRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
-class MainViewModel(private val repository: TodoRepository) :ViewModel() {
+
+class MainViewModel(private val repository: TodoRepository) : ViewModel() {
     val todos = repository.allTodos
 
-    // Add data in list
+    /**
+     * Launching a new coroutine to insert the data in a non-blocking way
+     */
     fun addTodo(todo: String) =
-        viewModelScope.launch(Dispatchers.IO) {
-            repository.insert(TodoItem(title = todo)) }
-
-    fun toggleTodo(todoItem: TodoItem) =
-        viewModelScope.launch(Dispatchers.IO) {
-            repository.insert(todoItem.copy(isDone = !todoItem.isDone)) }
+        viewModelScope.launch {
+            withContext(Dispatchers.IO) {
+                repository.insert(TodoItem(title = todo))
+            }
+        }
 
 }

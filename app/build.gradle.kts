@@ -1,9 +1,11 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
-    id ("dagger.hilt.android.plugin")
-    id ("kotlin-kapt")
-}
+    id("org.jetbrains.kotlin.kapt")
+
+ }
 
 android {
     namespace = "com.example.myapplication"
@@ -32,11 +34,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility =JavaVersion.VERSION_17
+        targetCompatibility =JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "17"
     }
     buildFeatures {
         compose = true
@@ -54,7 +56,7 @@ android {
 dependencies {
 
     implementation("androidx.core:core-ktx:1.13.1")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.3")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.4")
     implementation("androidx.activity:activity-compose:1.9.0")
     implementation(platform("androidx.compose:compose-bom:2023.08.00"))
     implementation("androidx.compose.ui:ui")
@@ -68,16 +70,23 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
-    // 1. Hilt dependency
-    implementation ("com.google.dagger:hilt-android:2.51")
-    kapt ("com.google.dagger:hilt-android-compiler:2.45")
-    kapt ("androidx.hilt:hilt-compiler:1.2.0")
-    implementation ("androidx.hilt:hilt-navigation-compose:1.2.0")
-    // 2. Room Runtime
-    implementation("androidx.room:room-runtime:2.6.1")
-    // 3. Room KTX
-    implementation("androidx.room:room-ktx:2.6.1")
-    // 4. Room Compiler
-    kapt("androidx.room:room-compiler:2.6.1")
 
+
+    // Room database
+    val roomVersion = "2.6.1"
+    kapt("androidx.room:room-compiler:$roomVersion")
+    implementation("androidx.room:room-runtime:$roomVersion")
+    implementation ("androidx.room:room-ktx:$roomVersion")
+
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.8.1")
+    //compose with liveData
+    implementation ("androidx.lifecycle:lifecycle-runtime-compose:1.4.3")
+
+    // ktx activity with view model injection
+    implementation ("androidx.activity:activity-ktx:1.7.2")
+    implementation ("androidx.navigation:navigation-compose:2.7.7")
+    implementation ("androidx.constraintlayout:constraintlayout-compose:1.0.1")
 }
+
+

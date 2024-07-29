@@ -1,9 +1,10 @@
-package com.example.myapplication.model
+package com.example.myapplication.model.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import com.example.myapplication.model.entities.TodoItem
 import kotlinx.coroutines.flow.Flow
 
 @Dao
