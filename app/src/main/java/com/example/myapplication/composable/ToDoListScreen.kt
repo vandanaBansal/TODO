@@ -36,8 +36,9 @@ fun MainScreen(
     // LazyColumn Setup
     Column {
         MyAppBar()
-        if(todos.isEmpty())
+        if(todos.isEmpty()){
             AddText()
+        }
         TodoItemsContainer(todos)
     }
 

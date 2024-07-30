@@ -30,7 +30,6 @@ fun FAB(modifier: Modifier = Modifier,
             onClick = {
                 // Task Submission Logic
                 onAddButtonClick()
-
             },
             // FAB Customization
             shape = CircleShape,

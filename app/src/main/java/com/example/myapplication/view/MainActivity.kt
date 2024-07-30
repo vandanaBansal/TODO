@@ -74,17 +74,16 @@ fun SetupNavGraph(navController: NavHostController, mainViewModel: Lazy<MainView
         startDestination = Screen.MainScreen.route
     ) {
         composable(route = Screen.DetailScreen.route) {
-            val state= mainViewModel.value.state.collectAsStateWithLifecycle()
-            if(!state.value.loading) {
-                DetailScreen(
-                    modifier = Modifier,
-                    onBackButtonClick = { navController.navigate(Screen.MainScreen.route) },
-                    onAddButtonClick = {
-                        mainViewModel.value.addTodo(it)
-                        mainViewModel.value.longProcess()
-                    },
-                )
-            }else if(state.value.loading){
+            DetailScreen(
+                modifier = Modifier,
+                onBackButtonClick = { navController.navigate(Screen.MainScreen.route) },
+                onAddButtonClick = {
+                    mainViewModel.value.addTodo(it)
+                    mainViewModel.value.longProcess()
+                },
+            )
+            val state = mainViewModel.value.state.collectAsStateWithLifecycle()
+            if (state.value.loading) {
                 LoadingBar()
                 navController.navigate(Screen.MainScreen.route)
             }
@@ -96,7 +95,6 @@ fun SetupNavGraph(navController: NavHostController, mainViewModel: Lazy<MainView
 
     }
 }
-
 
 
 @Preview(showBackground = true)
