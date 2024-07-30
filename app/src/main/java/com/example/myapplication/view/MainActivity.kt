@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -19,6 +20,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.myapplication.composable.DetailScreen
 import com.example.myapplication.ui.theme.MyApplicationTheme
 import com.example.myapplication.composable.FAB
+import com.example.myapplication.composable.LoadingBar
 import com.example.myapplication.composable.MainScreen
 import com.example.myapplication.model.Screen
 import com.example.myapplication.viewmodel.MainViewModel
@@ -72,14 +74,20 @@ fun SetupNavGraph(navController: NavHostController, mainViewModel: Lazy<MainView
         startDestination = Screen.MainScreen.route
     ) {
         composable(route = Screen.DetailScreen.route) {
-            DetailScreen(
-                modifier = Modifier,
-                onBackButtonClick = { navController.navigate(Screen.MainScreen.route) },
-                onAddButtonClick = {
-                    mainViewModel.value.addTodo(it)
-                    navController.navigate(Screen.MainScreen.route)
-                     },
-              )
+            val state= mainViewModel.value.state.collectAsStateWithLifecycle()
+            if(!state.value.loading) {
+                DetailScreen(
+                    modifier = Modifier,
+                    onBackButtonClick = { navController.navigate(Screen.MainScreen.route) },
+                    onAddButtonClick = {
+                        mainViewModel.value.addTodo(it)
+                        mainViewModel.value.longProcess()
+                    },
+                )
+            }else if(state.value.loading){
+                LoadingBar()
+                navController.navigate(Screen.MainScreen.route)
+            }
         }
 
         composable(route = Screen.MainScreen.route) {
@@ -88,6 +96,8 @@ fun SetupNavGraph(navController: NavHostController, mainViewModel: Lazy<MainView
 
     }
 }
+
+
 
 @Preview(showBackground = true)
 @Composable
