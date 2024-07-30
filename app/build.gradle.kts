@@ -1,4 +1,4 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 
 plugins {
     id("com.android.application")
@@ -80,10 +80,10 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1")
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.8.1")
     //compose with liveData
-    implementation ("androidx.lifecycle:lifecycle-runtime-compose:1.4.3")
+    implementation ("androidx.lifecycle:lifecycle-runtime-compose:2.8.4")
 
     // ktx activity with view model injection
-    implementation ("androidx.activity:activity-ktx:1.7.2")
+    implementation ("androidx.activity:activity-ktx:1.9.0")
     implementation ("androidx.navigation:navigation-compose:2.7.7")
     implementation ("androidx.constraintlayout:constraintlayout-compose:1.0.1")
 }
