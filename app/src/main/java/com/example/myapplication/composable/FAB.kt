@@ -26,13 +26,13 @@ fun FAB(modifier: Modifier = Modifier,
     ) {
 
         FloatingActionButton(
-            containerColor = colorResource(id = R.color.orange),
+            containerColor = colorResource(id = R.color.dark_green),
             onClick = {
-                // 1. Task Submission Logic
+                // Task Submission Logic
                 onAddButtonClick()
 
             },
-            // 2. FAB Customization
+            // FAB Customization
             shape = CircleShape,
             modifier = Modifier.size(dimensionResource(R.dimen.TodoInputBarFabSize)),
             elevation = FloatingActionButtonDefaults.elevation(

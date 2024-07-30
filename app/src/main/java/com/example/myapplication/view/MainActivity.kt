@@ -64,7 +64,6 @@ fun HomeScreen(navController: NavHostController, mainViewModel: Lazy<MainViewMod
             onAddButtonClick = { navController.navigate(Screen.DetailScreen.route) }
         )
 
-
     }
 }
 
@@ -75,7 +74,10 @@ fun SetupNavGraph(navController: NavHostController, mainViewModel: Lazy<MainView
         startDestination = Screen.MainScreen.route
     ) {
         composable(route = Screen.DetailScreen.route) {
-            DetailScreen(modifier = Modifier) { mainViewModel.value.addTodo(it) }
+            DetailScreen(
+                modifier = Modifier,
+                onBackButtonClick = { navController.navigate(Screen.MainScreen.route) },
+            ) { mainViewModel.value.addTodo(it) }
         }
 
         composable(route = Screen.MainScreen.route) {
