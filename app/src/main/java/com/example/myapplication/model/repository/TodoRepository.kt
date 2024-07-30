@@ -1,7 +1,7 @@
 package com.example.myapplication.model.repository
 
 import com.example.myapplication.model.dao.TodoDao
-import com.example.myapplication.model.entities.TodoItem
+import com.example.myapplication.model.data.TodoItem
 import kotlinx.coroutines.flow.Flow
 
 

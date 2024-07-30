@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
-
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
@@ -22,7 +21,6 @@ import com.example.myapplication.ui.theme.MyApplicationTheme
 import com.example.myapplication.composable.FAB
 import com.example.myapplication.composable.MainScreen
 import com.example.myapplication.model.Screen
-
 import com.example.myapplication.viewmodel.MainViewModel
 import com.example.myapplication.viewmodel.MainViewModelFactory
 
@@ -77,7 +75,11 @@ fun SetupNavGraph(navController: NavHostController, mainViewModel: Lazy<MainView
             DetailScreen(
                 modifier = Modifier,
                 onBackButtonClick = { navController.navigate(Screen.MainScreen.route) },
-            ) { mainViewModel.value.addTodo(it) }
+                onAddButtonClick = {
+                    mainViewModel.value.addTodo(it)
+                    navController.navigate(Screen.MainScreen.route)
+                     },
+              )
         }
 
         composable(route = Screen.MainScreen.route) {

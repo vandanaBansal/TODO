@@ -6,9 +6,8 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.myapplication.model.dao.TodoDao
-import com.example.myapplication.model.entities.TodoItem
+import com.example.myapplication.model.data.TodoItem
 import com.example.myapplication.utils.Constants
-import kotlinx.coroutines.CoroutineScope
 
 
 @Database(entities = [TodoItem::class], version = 1, exportSchema = false)
