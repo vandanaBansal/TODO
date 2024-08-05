@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.myapplication.model.data.SimpleLoadingState
 import com.example.myapplication.model.data.TodoItem
 import com.example.myapplication.model.repository.TodoRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -12,12 +13,15 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
 
-class MainViewModel(private val repository: TodoRepository) : ViewModel() {
+@HiltViewModel
+class MainViewModel @Inject constructor(private val repository: TodoRepository) : ViewModel() {
     val todos = repository.allTodos
-    private val _state= MutableStateFlow(SimpleLoadingState())
-    val state: StateFlow<SimpleLoadingState> =_state
+    private val _state = MutableStateFlow(SimpleLoadingState())
+    val state: StateFlow<SimpleLoadingState> = _state
+
     /**
      * Launching a new coroutine to insert the data in a non-blocking way
      */

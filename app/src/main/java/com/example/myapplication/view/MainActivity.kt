@@ -24,9 +24,10 @@ import com.example.myapplication.composable.LoadingBar
 import com.example.myapplication.composable.MainScreen
 import com.example.myapplication.model.Screen
 import com.example.myapplication.viewmodel.MainViewModel
-import com.example.myapplication.viewmodel.MainViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
 
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,9 +41,7 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     val navController = rememberNavController()
-                    val mainViewModel = viewModels<MainViewModel> {
-                        MainViewModelFactory((application as ToDoApplication).movieRepository)
-                    }
+                    val mainViewModel = viewModels<MainViewModel>()
                     SetupNavGraph(navController = navController, mainViewModel)
                 }
             }
