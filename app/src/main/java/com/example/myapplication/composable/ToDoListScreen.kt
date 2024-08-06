@@ -14,6 +14,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -44,19 +45,35 @@ fun MainScreen(
         if(todos.isEmpty()){
             AddText()
         }
-        TodoItemsContainer(todos)
+        TodoItemsContainer(todos,textState)
     }
 
 }
 
 @Composable
-fun TodoItemsContainer(todos: List<TodoItem>) {
+fun TodoItemsContainer(todos: List<TodoItem>, state: MutableState<TextFieldValue>) {
+    var filteredToDoList: List<TodoItem>
     LazyColumn(
         contentPadding = PaddingValues(dimensionResource(R.dimen.Medium)),
         verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.Medium))
     ) {
+        val searchedText = state.value.text
+
+        filteredToDoList = if (searchedText.isEmpty()) {
+            todos
+        } else {
+            val resultList = ArrayList<TodoItem>()
+            for (value in todos) {
+                if (value.title.lowercase()
+                        .contains(searchedText.lowercase())
+                ) {
+                    resultList.add(value)
+                }
+            }
+            resultList
+        }
         // Items Rendering
-        items(todos, key = { it.id }) { item ->
+        items(filteredToDoList, key = { it.id }) { item ->
             Row(
                 modifier = Modifier
                     .fillMaxSize(),
