@@ -15,11 +15,14 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.myapplication.R
@@ -33,9 +36,11 @@ fun MainScreen(
 ) {
     // Flow Data Collection
     val todos = todoItemsFlow.collectAsState(initial = listOf()).value
+    val textState = remember { mutableStateOf(TextFieldValue("")) }
     // LazyColumn Setup
     Column {
         MyAppBar()
+        SearchScreen(textState)
         if(todos.isEmpty()){
             AddText()
         }
