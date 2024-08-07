@@ -51,7 +51,7 @@ class MainActivity : ComponentActivity() {
 
 
 @Composable
-fun HomeScreen(navController: NavHostController, mainViewModel: Lazy<MainViewModel>) {
+private fun HomeScreen(navController: NavHostController, mainViewModel: Lazy<MainViewModel>) {
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -67,7 +67,7 @@ fun HomeScreen(navController: NavHostController, mainViewModel: Lazy<MainViewMod
 }
 
 @Composable
-fun SetupNavGraph(navController: NavHostController, mainViewModel: Lazy<MainViewModel>) {
+private fun SetupNavGraph(navController: NavHostController, mainViewModel: Lazy<MainViewModel>) {
     NavHost(
         navController = navController,
         startDestination = Screen.MainScreen.route
@@ -98,7 +98,7 @@ fun SetupNavGraph(navController: NavHostController, mainViewModel: Lazy<MainView
 
 @Preview(showBackground = true)
 @Composable
-fun GreetingPreview() {
+private fun GreetingPreview() {
     MyApplicationTheme {
 
     }

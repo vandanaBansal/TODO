@@ -33,7 +33,7 @@ import kotlinx.coroutines.flow.flowOf
 
 @Composable
 fun MainScreen(
-    todoItemsFlow: Flow<List<TodoItem>> = flowOf(listOf()),
+    todoItemsFlow: Flow<List<TodoItem>> = flowOf(listOf())
 ) {
     // Flow Data Collection
     val todos = todoItemsFlow.collectAsState(initial = listOf()).value
@@ -51,7 +51,7 @@ fun MainScreen(
 }
 
 @Composable
-fun TodoItemsContainer(todos: List<TodoItem>, state: MutableState<TextFieldValue>) {
+private fun TodoItemsContainer(todos: List<TodoItem>, state: MutableState<TextFieldValue>) {
     var filteredToDoList: List<TodoItem>
     LazyColumn(
         contentPadding = PaddingValues(dimensionResource(R.dimen.Medium)),
@@ -98,7 +98,7 @@ fun TodoItemsContainer(todos: List<TodoItem>, state: MutableState<TextFieldValue
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MyAppBar() {
+private fun MyAppBar() {
     CenterAlignedTopAppBar(
         colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
             containerColor = colorResource(id = R.color.green),
@@ -112,7 +112,7 @@ fun MyAppBar() {
 }
 
 @Composable
-fun AddText() {
+private fun AddText() {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,

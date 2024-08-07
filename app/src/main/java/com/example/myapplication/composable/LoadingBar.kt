@@ -16,15 +16,19 @@ import androidx.compose.ui.unit.dp
 @Preview()
 @Composable
 fun LoadingBar() {
-    Box (modifier = Modifier.heightIn(100.dp)
-        .width(100.dp).padding(10.dp)
-        , contentAlignment = Alignment.Center
+    Box(
+        modifier = Modifier
+            .heightIn(100.dp)
+            .width(100.dp)
+            .padding(10.dp), contentAlignment = Alignment.Center
 
-        ){
+    ) {
         Column {
-            CircularProgressIndicator(progress = .8f,  modifier = Modifier.width(64.dp),
+            CircularProgressIndicator(
+                progress = .8f, modifier = Modifier.width(64.dp),
                 color = MaterialTheme.colorScheme.secondary,
-                trackColor = MaterialTheme.colorScheme.surfaceVariant)
+                trackColor = MaterialTheme.colorScheme.surfaceVariant
+            )
         }
 
     }
