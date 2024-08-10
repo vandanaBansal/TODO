@@ -95,6 +95,11 @@ dependencies {
     implementation("androidx.hilt:hilt-navigation-compose:1.1.0")
     kapt("com.google.dagger:hilt-android-compiler:2.50")
     implementation("androidx.navigation:navigation-compose:2.7.6")
+
+    testImplementation ("com.google.truth:truth:1.1.3")
+    testImplementation("app.cash.turbine:turbine:0.12.1")
+    testImplementation( "io.mockk:mockk:1.9.3")
+    implementation("androidx.test:core-ktx:1.6.1")
 }
 kapt {
     correctErrorTypes = true

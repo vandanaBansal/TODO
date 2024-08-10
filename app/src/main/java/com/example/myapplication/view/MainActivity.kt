@@ -25,7 +25,7 @@ import com.example.myapplication.ui.theme.MyApplicationTheme
 import com.example.myapplication.composable.FAB
 import com.example.myapplication.composable.LoadingBar
 import com.example.myapplication.composable.MainScreen
-import com.example.myapplication.model.Screen
+import com.example.myapplication.model.data.Screen
 import com.example.myapplication.model.data.UiState
 import com.example.myapplication.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
