@@ -6,17 +6,12 @@ import androidx.test.core.app.ApplicationProvider
 import com.example.myapplication.model.dao.TodoDao
 import com.example.myapplication.model.data.TodoItem
 import com.example.myapplication.model.database.AppDatabase
-import com.example.myapplication.model.repository.TodoRepository
-
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.StandardTestDispatcher
-import kotlinx.coroutines.test.TestCoroutineDispatcher
-import kotlinx.coroutines.test.TestCoroutineScope
-import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runTest
