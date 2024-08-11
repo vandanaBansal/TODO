@@ -47,7 +47,7 @@ class MainViewModel @Inject constructor(private val repository: TodoRepository) 
  private fun longProcess() {
         viewModelScope.launch {
             try {
-                delay(1000) // Simulating network delay
+                delay(3000) // Simulating network delay
                 _uiState.value = UiState.Success
             } catch (e: Exception) {
                 _uiState.value = UiState.Error("Failed to add TODO")
